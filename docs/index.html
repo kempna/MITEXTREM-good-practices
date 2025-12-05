@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Databáze dobrých praktik – meteorologické extrémy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Databáze dobrých praktik pro mitigaci dopadů meteorologických extrémů</h1>
+    <p>
+      Opatření zaměřená na bezpečnost, zdraví, činnosti a hmotné statky ve městech a aglomeracích,
+      chápána ve smyslu <strong>risk trade-off</strong> (přínosy i rizika).
+    </p>
+    <p>
+      Data jsou zveřejněna jako otevřená databáze. Zdroj: projektové výstupy,
+      případové studie a mezinárodní organizace (např. UNDRR, OECD, Resilient Cities aj.).
+    </p>
+  </header>
+
+  <section id="filters">
+    <h2>Filtry</h2>
+    <div class="filters-grid">
+      <label>
+        Typ extrému:
+        <select id="filter-hazard">
+          <option value="">Vše</option>
+        </select>
+      </label>
+
+      <label>
+        Měřítko aplikace:
+        <select id="filter-scale">
+          <option value="">Vše</option>
+        </select>
+      </label>
+
+      <label>
+        Lokalita (obsahuje):
+        <input type="text" id="filter-location" placeholder="např. Brno" />
+      </label>
+
+      <button id="reset-filters">Reset filtrů</button>
+    </div>
+  </section>
+
+  <section id="table-section">
+    <h2>Přehled dobrých praktik</h2>
+    <table id="practices-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Název praktiky</th>
+          <th>Typ extrému</th>
+          <th>Měřítko aplikace</th>
+          <th>Lokalita</th>
+          <th>Přínosy a výhody</th>
+          <th>Rizika a omezení</th>
+          <th>Reference a zdroje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- vyplní se dynamicky -->
+      </tbody>
+    </table>
+  </section>
+
+  <section id="help">
+    <h2>Nápověda a metodika</h2>
+    <p>
+      Každá „dobrá praxe“ je chápána jako <strong>risk trade-off</strong> opatření:
+    </p>
+    <ul>
+      <li><strong>Přínosy a výhody</strong> – jaké pozitivní dopady opatření má, jaké problémy řeší.</li>
+      <li><strong>Rizika a omezení</strong> – vedlejší dopady, náklady, konflikty s jinými cíli, limity použitelnosti.</li>
+    </ul>
+    <p>
+      Databáze je určena pro:
+    </p>
+    <ul>
+      <li>města a obce (strategické plánování, adaptační a mitigační strategie),</li>
+      <li>integrovaný záchranný systém a krizové řízení,</li>
+      <li>výzkumné organizace a univerzity.</li>
+    </ul>
+    <p>
+      Podrobnější informace k jednotlivým opatřením najdete v kolonce
+      <em>Reference a zdroje</em>, kde jsou odkazy na guidelines, případové studie a
+      materiály organizací jako UNDRR, OECD či Resilient Cities.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Licence: CC BY 4.0 – prosím uveďte zdroj při dalším použití.
+    </p>
+    <p>
+      Zdrojový kód a data: <a href="https://github.com/TVŮJ-USERNAME/mitextrem-good-practices">GitHub repozitář</a>
+      (nahraď TVŮJ-USERNAME svým uživatelským jménem).
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
