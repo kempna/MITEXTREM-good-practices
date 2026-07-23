@@ -1,98 +1,40 @@
-# MITEXTREM — Databáze dobrých praktik
+# MITEXTREM – Databáze dobrých praktik v mitigaci dopadů meteorologických extrémů
 
-Jednosouborová R Shiny aplikace pro správu databáze dobrých praktik mitigace dopadů meteorologických extrémů.
+Veřejná, otevřená databáze ověřených **dobrých praktik pro mitigaci dopadů meteorologických extrémů** — zvláště vln veder, dále přívalových dešťů, povodní, sucha a větru — ve městech a aglomeracích. U každé praktiky jsou uvedeny **přínosy i rizika/omezení** (princip *risk trade-off*).
 
-## Stav projektu
-- Hlavní aplikace: `app.R`
-- Lokální data: `databaze_mitextrem_clean.csv`
-- Databázové schéma: `schema.sql`
-- Lokální SQLite databáze: `mitextrem.db`
-- Lokální credentials: `credentials.sqlite`
+Výsledek projektu **SS07020449** (TA ČR, program *Prostředí pro život*), řešitel Ostravská univerzita.
 
-> Poznámka: tento pracovní adresář zatím neobsahuje `.git` repozitář.
+## 🔗 Odkazy
+- **Interaktivní aplikace:** https://disasters.shinyapps.io/MITEXTREM_Database/
+- **Rozcestník (GitHub Pages):** https://kempna.github.io/MITEXTREM-good-practices/
+- **Otevřená data:** CSV a JSON ve složce [`data/`](data/)
 
-## Běžné spuštění
-Otevřete R v kořenové složce projektu a spusťte:
+## 📂 Obsah repozitáře
+| Cesta | Popis |
+|---|---|
+| `data/practices_latest.csv` | Aktuální datová sada praktik (UTF-8 s BOM, oddělovač `,`) |
+| `data/practices_latest.json` | Táž data ve formátu JSON |
+| `data/trash/` | Archiv odstraněných záznamů |
+| `docs/` | Zdroj statické rozcestníkové stránky (GitHub Pages) |
+| `scripts/` | Pomocný skript pro čištění a export dat |
 
-```r
-shiny::runApp()
-```
+Data se aktualizují automaticky z aplikace při každé změně.
 
-Nebo z příkazové řádky:
+## 🧭 Datový slovník (sloupce)
+`ID`, `Název praktiky`, `Typ extrému`, `Měřítko aplikace`, `Lokalita`, `Zeměpisná šířka`, `Zeměpisná délka`, `Relativní nákladnost`, `Doba implementace cca`, `Popis praktiky`, `Přínosy a výhody`, `Rizika a omezení`, `Postup implementace`, `Zdrojová organizace`, `Kontaktní údaje`, `Reference a zdroje`, `Datum přidání`, `Podpůrné soubory`, `Oblast dopadu`, `Typ opatření`, `Fáze krize`, `Provenience`, `Úroveň ověření`, `Stav`, `Kanonický klíč`.
 
-```bash
-Rscript -e "shiny::runApp('app.R')"
-```
+Vícehodnotová pole (**Typ extrému**, **Oblast dopadu**, **Fáze krize**) jsou oddělena čárkou.
 
-## Požadované balíčky
-Aplikace používá tyto balíčky:
+## 📜 Licence
+Data jsou zveřejněna pod licencí **CC BY 4.0**. Při použití prosím uveďte zdroj.
 
-- shiny
-- shinydashboard
-- DT
-- DBI
-- RSQLite
-- dplyr
-- leaflet
-- plotly
-- shinyWidgets
-- shinymanager
-- stringdist
-- uuid
-- htmltools
-- jsonlite
-- emayili (volitelně pro SMTP)
-- httr (volitelně pro GitHub zálohy)
+## 📎 Jak citovat
+> MITEXTREM – Databáze dobrých praktik v mitigaci dopadů meteorologických extrémů. Ostravská univerzita, 2026. Projekt TA ČR č. SS07020449. Dostupné z: https://kempna.github.io/MITEXTREM-good-practices/
+>
+> DOI: *(bude doplněno – Zenodo)*
 
-Pokud některý chybí, nainstalujte ho v R:
+## 🙏 Financování
+Tento výsledek vznikl za finanční podpory **Technologické agentury ČR**, program **Prostředí pro život**, projekt č. **SS07020449**. Autoři: Kamila Kempná, Pavel Danihelka (Ostravská univerzita).
 
-```r
-install.packages(c(
-  'shiny','shinydashboard','DT','DBI','RSQLite','dplyr',
-  'leaflet','plotly','shinyWidgets','shinymanager','stringdist',
-  'uuid','htmltools','jsonlite'))
-```
-
-## Potřebné soubory
-- `app.R`
-- `schema.sql`
-- `databaze_mitextrem_clean.csv`
-- `credentials.sqlite` (lokální, nemá být v Gitu)
-- `mitextrem.db` (lokální, nemá být v Gitu)
-
-## Důležité proměnné prostředí
-Aplikace čte konfiguraci z proměnných prostředí:
-
-- `MITEXTREM_CRED_PASS`
-- `MITEXTREM_ADMIN_EMAIL`
-- `MITEXTREM_APP_URL`
-- `MITEXTREM_SMTP_HOST`
-- `MITEXTREM_SMTP_PORT`
-- `MITEXTREM_SMTP_USER`
-- `MITEXTREM_SMTP_PASS`
-- `MITEXTREM_GH_OWNER`
-- `MITEXTREM_GH_REPO`
-- `MITEXTREM_GH_BRANCH`
-- `MITEXTREM_GH_DIR`
-- `MITEXTREM_GH_TOKEN`
-
-Pro produkční provoz nastavte minimálně:
-- `MITEXTREM_ADMIN_EMAIL`
-- `MITEXTREM_APP_URL`
-- `MITEXTREM_GH_TOKEN`
-- `MITEXTREM_GH_OWNER`
-- `MITEXTREM_GH_REPO`
-
-## Bezpečnostní upozornění
-- `credentials.sqlite` a `.Renviron` jsou citlivé soubory a nemají být commitované.
-- Výchozí hesla účtů jsou `admin123`, `editor123`, `host123`; změňte je při prvním přihlášení.
-- Lokální databáze `mitextrem.db` a složka `backups/` jsou dočasné a nemají být verzovány.
-
-## Licence
-- Kód a dokumentace jsou poskytovány pod licencí MIT.
-- Data v databázi jsou určena pro sdílení jako CC BY 4.0.
-
-## Další poznámky
-- Aplikace při prvním spuštění automaticky založí databázi a naimportuje CSV.
-- Pokud je k dispozici token GitHubu a správně nastaveny proměnné prostředí, aplikace automaticky zálohuje data do repozitáře.
-- Složka `www/uploads` se vytváří automaticky.
+## ✉️ Kontakt
+Ostravská univerzita — *(doplňte kontaktní e-mail)*
